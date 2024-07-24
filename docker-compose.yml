@@ -6,6 +6,7 @@ services:
   mongo-db:
     image: mongo
     restart: always
+    container_name: mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongo-user
       MONGO_INITDB_ROOT_PASSWORD: 123456
@@ -17,6 +18,7 @@ services:
   # postgres-db:
   #   image: postgres:15.3
   #   restart: always
+  #   container_name: postgresdb
   #   environment:
   #     POSTGRES_USER: postgres
   #     POSTGRES_DB: my-db
