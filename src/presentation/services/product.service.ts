@@ -31,8 +31,9 @@ export class ProductService {
         ProductModel.countDocuments(),
         ProductModel.find()
           .skip((page - 1) * limit)
-          .limit(limit),
-        //todo:populate
+          .limit(limit)
+          .populate('user')
+          .populate('category'),
       ]);
 
       return {
@@ -40,9 +41,9 @@ export class ProductService {
         limit: limit,
         total: total,
         next: `/api/products?page=${page + 1}&limit=${limit}`,
-        prev: page - 1 > 0 ? `/api/categories?page=${page - 1}&limit=${limit}` : null,
+        prev: page - 1 > 0 ? `/api/products?page=${page - 1}&limit=${limit}` : null,
 
-        categories: products,
+        products: products,
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
