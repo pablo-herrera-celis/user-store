@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { FileUploadController } from './controlles';
 import { FileUploadService } from '../services/file-upload.service';
-import { FileUploadMiddleware } from '../middlewares/file-upload.middleware';
+import { FileUploadMiddleware, TypeMiddleware } from '../middlewares';
 
 export class FileUploadRoutes {
   static get routes(): Router {
@@ -10,6 +10,7 @@ export class FileUploadRoutes {
     const controller = new FileUploadController(new FileUploadService());
 
     router.use(FileUploadMiddleware.containFiles);
+    router.use(TypeMiddleware.validTypes(['users', 'products', 'categories']));
 
     // Definir las rutas
     //api/upload/single/<user\category\product>/
