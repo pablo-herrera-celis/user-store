@@ -14,7 +14,7 @@ export class ProductController {
     return res.status(500).json({ error: 'Internal server error' });
   };
 
-  createProduct = async (req: Request, res: Response) => {
+  createProduct = (req: Request, res: Response) => {
     const [error, createProductDto] = CreateProductDto.create({
       ...req.body,
       user: req.body.user.id,
@@ -27,7 +27,7 @@ export class ProductController {
       .catch((error) => this.handleError(error, res));
   };
 
-  getProducts = async (req: Request, res: Response) => {
+  getProducts = (req: Request, res: Response) => {
     const { page = 1, limit = 10 } = req.query;
     const [error, paginationDto] = PaginationDto.create(+page, +limit);
     if (error) return res.status(400).json({ error });
